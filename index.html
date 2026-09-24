@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>لایتنر آلمانی</title>
+
+<!-- ==================== PWA Meta Tags ==================== -->
+<meta name="description" content="لایتنر پنج‌باکسی برای یادگیری لغات آلمانی به فارسی">
+<meta name="theme-color" content="#0b0f1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="لایتنر آلمانی">
+<meta name="application-name" content="لایتنر آلمانی">
+<meta name="msapplication-TileColor" content="#6366f1">
+<meta name="msapplication-tap-highlight" content="no">
+
+<!-- آیکون‌ها (SVG به‌صورت Data URI) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+
+<style>
+  :root {
+    --bg: #0b0f1a;
+    --surface: #151b2b;
+    --surface-2: #1e2638;
+    --surface-3: #2a3348;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.4);
+    --success: #10b981;
+    --success-glow: rgba(16, 185, 129, 0.3);
+    --danger: #f43f5e;
+    --danger-glow: rgba(244, 63, 94, 0.3);
+    --warning: #f59e0b;
+    --warning-glow: rgba(245, 158, 11, 0.3);
+    --radius: 18px;
+    --radius-sm: 12px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --surface-3: #e2e8f0;
+    --border: rgba(15, 23, 42, 0.06);
+    --border-strong: rgba(15, 23, 42, 0.12);
+    --text: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    transition: background var(--transition), color var(--transition);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--success-glow), transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+  }
+
+  .app {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 20px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+  }
+
+  .logo { display: flex; align-items: center; gap: 12px; }
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 8px 24px var(--accent-glow);
+  }
+
+  .logo-text h1 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text .sub {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 1px;
+    font-weight: 500;
+  }
+
+  .header-actions { display: flex; gap: 8px; }
+
+  .icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .icon-btn:hover {
+    background: var(--surface-2);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  /* دکمه نصب */
+  #btnInstall {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    width: auto;
+    padding: 0 14px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    gap: 6px;
+    box-shadow: 0 6px 20px var(--success-glow);
+  }
+
+  #btnInstall:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px var(--success-glow);
+  }
+
+  #btnInstall.hidden { display: none; }
+
+  .boxes-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .box-chip {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .box-chip:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .box-chip.active {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, var(--surface), rgba(99, 102, 241, 0.08));
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .box-chip .chip-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .box-chip .chip-count {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .box-chip.active .chip-count { color: #818cf8; }
+
+  .card-area {
+    perspective: 1600px;
+    min-height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0;
+  }
+
+  .card {
+    width: 100%;
+    height: 320px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card.clickable { cursor: pointer; }
+  .card.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 24px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  [data-theme="light"] .card-face {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02) inset;
+  }
+
+  .card-face.back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--surface), rgba(99, 102, 241, 0.12));
+    border-color: var(--accent);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 60px var(--accent-glow);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .card-word {
+    font-size: 3rem;
+    font-weight: 900;
+    direction: ltr;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    word-break: break-word;
+    color: var(--text);
+  }
+
+  .card-article {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: lowercase;
+    margin-bottom: 4px;
+  }
+
+  .card-article.der { background: #3b82f6; color: white; }
+  .card-article.die { background: #ec4899; color: white; }
+  .card-article.das { background: #10b981; color: white; }
+
+  .card-meaning {
+    font-size: 1.6rem;
+    color: #c084fc;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .card-meaning.not-found {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .review-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+
+  .review-actions.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  .action-btn {
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 14px 10px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all var(--transition);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .action-btn .emoji { font-size: 1.5rem; line-height: 1; }
+  .action-btn .label { font-size: 0.85rem; font-weight: 800; }
+  .action-btn .hint { font-size: 0.65rem; opacity: 0.75; font-weight: 500; }
+
+  .action-btn:not(:disabled):hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+  }
+
+  .action-btn:not(:disabled):active { transform: translateY(-1px); }
+  .action-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .btn-wrong {
+    background: linear-gradient(135deg, #f43f5e, #be123c);
+    box-shadow: 0 8px 24px var(--danger-glow);
+  }
+
+  .btn-hard {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 8px 24px var(--warning-glow);
+  }
+
+  .btn-good {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 8px 24px var(--success-glow);
+  }
+
+  .status-msg {
+    text-align: center;
+    font-size: 0.88rem;
+    min-height: 22px;
+    font-weight: 700;
+    padding: 0 10px;
+    transition: color var(--transition);
+  }
+
+  .add-section {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .add-row { display: flex; gap: 8px; }
+
+  .add-input {
+    flex: 1;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 1rem;
+    outline: none;
+    transition: all var(--transition);
+    font-family: inherit;
+    direction: ltr;
+    text-align: left;
+  }
+
+  .add-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: var(--surface);
+  }
+
+  .add-input::placeholder {
+    color: var(--text-dim);
+    direction: rtl;
+    text-align: right;
+  }
+
+  .add-btn {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 14px 24px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+    box-shadow: 0 8px 24px var(--accent-glow);
+    white-space: nowrap;
+  }
+
+  .add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px var(--accent-glow);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+  }
+
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--surface);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 24px;
+    max-width: 460px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.92);
+    transition: transform var(--transition);
+  }
+
+  .modal-overlay.show .modal { transform: scale(1); }
+
+  .modal h3 {
+    margin-bottom: 18px;
+    color: #818cf8;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 22px;
+  }
+
+  .btn {
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+  }
+
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #4f46e5; transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-strong); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-box {
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }
+
+  .stat-box .val {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #818cf8;
+    line-height: 1;
+  }
+
+  .stat-box .lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  .stat-box.success .val { color: var(--success); }
+  .stat-box.danger .val { color: var(--danger); }
+  .stat-box.warning .val { color: var(--warning); }
+
+  .settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .setting-row:last-child { border-bottom: none; }
+
+  .setting-row label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+  }
+
+  .setting-row .hint {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .setting-row input[type="number"] {
+    width: 76px;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    color: var(--text);
+    font-size: 0.9rem;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  .switch {
+    position: relative;
+    width: 48px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .switch input { opacity: 0; width: 0; height: 0; }
+
+  .switch-track {
+    position: absolute;
+    inset: 0;
+    background: var(--surface-3);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .switch-track::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    right: 3px;
+    transition: all var(--transition);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .switch input:checked + .switch-track { background: var(--accent); }
+  .switch input:checked + .switch-track::before { transform: translateX(-20px); }
+
+  /* Toast راهنمای نصب */
+  .install-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: calc(100% - 32px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    direction: rtl;
+  }
+
+  .install-toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .install-toast .toast-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .install-toast .toast-close {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  .install-toast .toast-action {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 14px; padding-top: max(14px, env(safe-area-inset-top)); padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+    .app { gap: 14px; }
+    .logo-mark { width: 40px; height: 40px; font-size: 1.15rem; }
+    .logo-text h1 { font-size: 1rem; }
+    .icon-btn { width: 38px; height: 38px; font-size: 0.95rem; }
+    #btnInstall { padding: 0 10px; font-size: 0.72rem; height: 38px; }
+    .boxes-bar { gap: 5px; }
+    .box-chip { padding: 9px 3px; }
+    .box-chip .chip-label { font-size: 0.6rem; }
+    .box-chip .chip-count { font-size: 1.1rem; }
+    .card-area { min-height: 280px; }
+    .card { height: 280px; }
+    .card-face { padding: 24px 18px; }
+    .card-word { font-size: 2.2rem; }
+    .card-meaning { font-size: 1.25rem; }
+    .card-article { font-size: 0.9rem; padding: 5px 16px; }
+    .action-btn { padding: 12px 6px; }
+    .action-btn .emoji { font-size: 1.3rem; }
+    .action-btn .label { font-size: 0.75rem; }
+    .action-btn .hint { display: none; }
+    .add-btn { padding: 12px 18px; font-size: 0.9rem; }
+    .add-input { padding: 12px 14px; font-size: 0.95rem; }
+  }
+
+  @media (min-width: 900px) {
+    .app { max-width: 780px; gap: 22px; }
+    .card { height: 360px; }
+    .card-area { min-height: 360px; }
+    .card-word { font-size: 3.5rem; }
+    .card-meaning { font-size: 1.8rem; }
+    .box-chip { padding: 14px 8px; }
+    .box-chip .chip-count { font-size: 1.5rem; }
+    .action-btn { padding: 18px 12px; }
+    .action-btn .emoji { font-size: 1.7rem; }
+    .action-btn .label { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="logo">
+      <div class="logo-mark">📦</div>
+      <div class="logo-text">
+        <h1>لایتنر آلمانی</h1>
+        <div class="sub">پنج باکس · مرور فاصله‌دار</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn hidden" id="btnInstall" title="نصب برنامه">📲 <span>نصب</span></button>
+      <button class="icon-btn" id="btnTheme" title="تغییر تم">🌙</button>
+      <button class="icon-btn" id="btnStats" title="آمار">📊</button>
+      <button class="icon-btn" id="btnSettings" title="تنظیمات">⚙️</button>
+    </div>
+  </header>
+
+  <div class="boxes-bar" id="boxesBar"></div>
+
+  <div class="card-area">
+    <div class="card" id="card">
+      <div class="card-face front">
+        <div class="card-content" id="frontContent">
+          <div class="card-word" id="frontWord"></div>
+        </div>
+      </div>
+
+      <div class="card-face back">
+        <div class="card-content" id="backContent">
+          <div class="card-article" id="backArticle"></div>
+          <div class="card-word" id="backWord"></div>
+          <div class="card-meaning" id="backMeaning"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-actions" id="reviewActions">
+    <button class="action-btn btn-wrong" id="btnWrong" disabled>
+      <span class="emoji">❌</span>
+      <span class="label">بلد نبودم</span>
+      <span class="hint">برگشت به باکس ۱</span>
+    </button>
+    <button class="action-btn btn-hard" id="btnHard" disabled>
+      <span class="emoji">🤔</span>
+      <span class="label">سخت بود</span>
+      <span class="hint">انتهای صف</span>
+    </button>
+    <button class="action-btn btn-good" id="btnGood" disabled>
+      <span class="emoji">✅</span>
+      <span class="label">بلد بودم</span>
+      <span class="hint">یک باکس جلو</span>
+    </button>
+  </div>
+
+  <div class="status-msg" id="statusMsg"></div>
+
+  <div class="add-section">
+    <div class="add-row">
+      <input type="text" class="add-input" id="inputGerman" placeholder="مثلاً: das Haus" autocomplete="off" spellcheck="false">
+      <button class="add-btn" id="btnAdd">افزودن</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Toast راهنمای نصب -->
+<div class="install-toast" id="installToast">
+  <span class="toast-text" id="toastText">این برنامه را روی دستگاه خود نصب کنید</span>
+  <button class="toast-action" id="toastAction">نصب</button>
+  <button class="toast-close" id="toastClose">✕</button>
+</div>
+
+<div class="modal-overlay" id="statsModal">
+  <div class="modal">
+    <h3>📊 آمار شما</h3>
+    <div class="stats-grid" id="statsGrid"></div>
+    <div style="margin-top:18px;">
+      <h4 style="color:#818cf8;font-size:0.85rem;margin-bottom:10px;font-weight:800;">توزیع در باکس‌ها</h4>
+      <div id="boxDistribution"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="btnCloseStats">بستن</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <h3>⚙️ تنظیمات</h3>
+    <div class="settings-list">
+      <div class="setting-row">
+        <div><label>فاصله باکس ۱ (روز)</label><div class="hint">مرور روزانه</div></div>
+        <input type="number" id="setI1" min="1" value="1">
+      </div>
+      <div class="setting-row">
+        <div><label>فاصله باکس ۲ (روز)</label><div class="hint">پس از اولین پاسخ درست</div></div>
+        <input type="number" id="setI2" min="1" value="2">
+      </div>
+      <div class="setting-row">
+        <div><label>فاصله باکس ۳ (روز)</label><div class="hint">تثبیت متوسط</div></div>
+        <input type="number" id="setI3" min="1" value="4">
+      </div>
+      <div class="setting-row">
+        <div><label>فاصله باکس ۴ (روز)</label><div class="hint">تثبیت خوب</div></div>
+        <input type="number" id="setI4" min="1" value="7">
+      </div>
+      <div class="setting-row">
+        <div><label>فاصله باکس ۵ (روز)</label><div class="hint">تثبیت بلندمدت</div></div>
+        <input type="number" id="setI5" min="1" value="14">
+      </div>
+      <div class="setting-row">
+        <div><label>ترجمه خودکار</label><div class="hint">MyMemory رایگان</div></div>
+        <label class="switch">
+          <input type="checkbox" id="setApi">
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="btnResetSettings">بازنشانی</button>
+      <button class="btn btn-primary" id="btnSaveSettings">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PWA — Service Worker و Manifest به‌صورت Data URI
+   ============================================================ */
+
+/* ---------- ساخت Manifest به‌صورت Blob ---------- */
+const manifestData = {
+  name: "لایتنر آلمانی",
+  short_name: "لایتنر",
+  description: "لایتنر پنج‌باکسی برای یادگیری لغات آلمانی به فارسی",
+  start_url: ".",
+  scope: ".",
+  display: "standalone",
+  orientation: "portrait",
+  background_color: "#0b0f1a",
+  theme_color: "#0b0f1a",
+  lang: "fa",
+  dir: "rtl",
+  icons: [
+    {
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E",
+      sizes: "512x512",
+      type: "image/svg+xml",
+      purpose: "any maskable"
+    },
+    {
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E",
+      sizes: "192x192",
+      type: "image/svg+xml",
+      purpose: "any maskable"
+    }
+  ]
+};
+
+const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
+const manifestURL = URL.createObjectURL(manifestBlob);
+
+const manifestLink = document.createElement('link');
+manifestLink.rel = 'manifest';
+manifestLink.href = manifestURL;
+document.head.appendChild(manifestLink);
+
+/* ---------- ثبت Service Worker به‌صورت Blob ---------- */
+const swCode = `
+  const CACHE_NAME = 'leitner-de-v1';
+  const ASSETS = ['./'];
+
+  self.addEventListener('install', (event) => {
+    self.skipWaiting();
+    event.waitUntil(
+      caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS).catch(() => {}))
+    );
+  });
+
+  self.addEventListener('activate', (event) => {
+    event.waitUntil(
+      caches.keys().then((keys) =>
+        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      ).then(() => self.clients.claim())
+    );
+  });
+
+  self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') return;
+    const url = new URL(event.request.url);
+
+    // درخواست‌های API را کش نکن
+    if (url.hostname.includes('mymemory')) return;
+
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        const fetchPromise = fetch(event.request).then((response) => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        }).catch(() => cached);
+        return cached || fetchPromise;
+      })
+    );
+  });
+`;
+
+if ('serviceWorker' in navigator) {
+  try {
+    const swBlob = new Blob([swCode], { type: 'application/javascript' });
+    const swURL = URL.createObjectURL(swBlob);
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register(swURL, { scope: './' })
+        .then(() => console.log('✅ Service Worker ثبت شد'))
+        .catch((err) => console.warn('SW registration failed:', err));
+    });
+  } catch (e) {
+    console.warn('SW setup error:', e);
+  }
+}
+
+/* ============================================================
+   نصب PWA — مدیریت رویداد beforeinstallprompt
+   ============================================================ */
+let deferredPrompt = null;
+const installBtn = document.getElementById('btnInstall');
+const installToast = document.getElementById('installToast');
+const toastText = document.getElementById('toastText');
+const toastAction = document.getElementById('toastAction');
+const toastClose = document.getElementById('toastClose');
+
+// تشخیص نصب بودن
+const isStandalone = () => {
+  return window.matchMedia('(display-mode: standalone)').matches
+    || window.navigator.standalone === true
+    || document.referrer.includes('android-app://');
+};
+
+// تشخیص iOS
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+
+// تشخیص اندروید
+const isAndroid = () => /android/i.test(navigator.userAgent);
+
+// رویداد قبل از نصب (اندروید/کروم/اج)
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // نمایش دکمه نصب
+  if (installBtn) installBtn.classList.remove('hidden');
+  // نمایش Toast
+  showInstallToast('برنامه را نصب کنید و آفلاین استفاده کنید', 'نصب');
+});
+
+// رویداد نصب موفق
+window.addEventListener('appinstalled', () => {
+  console.log('✅ PWA نصب شد');
+  deferredPrompt = null;
+  if (installBtn) installBtn.classList.add('hidden');
+  hideInstallToast();
+  showToastMessage('برنامه با موفقیت نصب شد');
+});
+
+// دکمه نصب در هدر
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    await triggerInstall();
+  });
+}
+
+// دکمه نصب در Toast
+if (toastAction) {
+  toastAction.addEventListener('click', async () => {
+    await triggerInstall();
+  });
+}
+
+if (toastClose) {
+  toastClose.addEventListener('click', () => {
+    hideInstallToast();
+    // ذخیره که کاربر رد کرده تا ۷ روز دیگر نشان نده
+    localStorage.setItem('install_dismissed', Date.now().toString());
+  });
+}
+
+async function triggerInstall() {
+  if (deferredPrompt) {
+    // اندروید/کروم/اج — از prompt بومی استفاده کن
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log('Install outcome:', outcome);
+    deferredPrompt = null;
+    if (installBtn) installBtn.classList.add('hidden');
+    hideInstallToast();
+  } else if (isIOS()) {
+    // iOS — راهنمای دستی
+    showToastMessage('در Safari روی دکمه Share بزنید و «Add to Home Screen» را انتخاب کنید', 6000);
+  } else {
+    // سایر مرورگرها — راهنمای دستی
+    showToastMessage('از منوی مرورگر گزینه «Install app» یا «Add to Home Screen» را انتخاب کنید', 6000);
+  }
+}
+
+function showInstallToast(text, actionLabel) {
+  // اگر کاربر قبلاً رد کرده، نشان نده
+  const dismissed = localStorage.getItem('install_dismissed');
+  if (dismissed) {
+    const daysSince = (Date.now() - parseInt(dismissed)) / (1000 * 60 * 60 * 24);
+    if (daysSince < 7) return;
+  }
+  // اگر نصب شده، نشان نده
+  if (isStandalone()) return;
+
+  toastText.textContent = text;
+  toastAction.textContent = actionLabel || 'نصب';
+  installToast.classList.add('show');
+  // بعد از ۱۵ ثانیه خودکار مخفی شود
+  setTimeout(() => hideInstallToast(), 15000);
+}
+
+function hideInstallToast() {
+  installToast.classList.remove('show');
+}
+
+/* Toast عمومی برای پیام */
+function showToastMessage(msg, duration = 3000) {
+  const existing = document.getElementById('generic-toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'generic-toast';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    z-index: 2000;
+    max-width: calc(100% - 32px);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    direction: rtl;
+  `;
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  });
+
+  setTimeout(() => {
+    toast.style.transform = 'translateX(-50%) translateY(120%)';
+    setTimeout(() => toast.remove(), 400);
+  }, duration);
+}
+
+/* نمایش راهنمای نصب در iOS (چون beforeinstallprompt پشتیبانی نمی‌شود) */
+if (isIOS() && !isStandalone()) {
+  setTimeout(() => {
+    showInstallToast('برای نصب: Share → Add to Home Screen', 'راهنما');
+  }, 3000);
+}
+
+/* اگر مرورگر از PWA پشتیبانی می‌کند ولی beforeinstallprompt نیامده،
+   بعد از ۵ ثانیه Toast راهنما نشان بده */
+setTimeout(() => {
+  if (!deferredPrompt && !isStandalone() && !isIOS()) {
+    showInstallToast('این برنامه را روی دستگاه خود نصب کنید', 'راهنما');
+  }
+}, 5000);
+
+/* ============================================================
+   لایتنر پنج‌باکسی آلمانی
+   ============================================================ */
+
+const STORAGE = {
+  cards: 'leitner_de_v8',
+  settings: 'leitner_de_settings_v8',
+  stats: 'leitner_de_stats_v8',
+  cache: 'leitner_de_cache_v8'
+};
+
+const DEFAULT_SETTINGS = {
+  intervals: { 1: 1, 2: 2, 3: 4, 4: 7, 5: 14 },
+  useApi: true,
+  theme: 'dark'
+};
+
+const BOX_LABELS = { 1: 'روزانه', 2: '۲روزه', 3: '۴روزه', 4: '۷روزه', 5: '۱۴روزه' };
+
+let cards = [];
+let settings = { ...DEFAULT_SETTINGS, intervals: { ...DEFAULT_SETTINGS.intervals } };
+let stats = { reviews: {}, totalReviews: 0, totalCorrect: 0, totalWrong: 0, streak: 0, lastReview: null };
+let cache = {};
+
+let activeBox = 1;
+let currentCardId = null;
+let isFlipped = false;
+
+let sessionQueue = [];
+let sessionPosition = 0;
+
+const $ = (id) => document.getElementById(id);
+
+const today = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+};
+
+const addDays = (dateStr, days) => {
+  const d = new Date(dateStr + 'T00:00:00');
+  d.setDate(d.getDate() + days);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+};
+
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+const extractArticle = (german) => {
+  const trimmed = String(german || '').trim();
+  const m = trimmed.match(/^(der|die|das)\s+(.+)$/i);
+  if (m) return { article: m[1].toLowerCase(), word: m[2].trim() };
+  return { article: '', word: trimmed };
+};
+
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const save = () => {
+  try {
+    localStorage.setItem(STORAGE.cards, JSON.stringify(cards));
+    localStorage.setItem(STORAGE.settings, JSON.stringify(settings));
+    localStorage.setItem(STORAGE.stats, JSON.stringify(stats));
+    localStorage.setItem(STORAGE.cache, JSON.stringify(cache));
+  } catch (e) { console.warn('Save error:', e); }
+};
+
+const load = () => {
+  try {
+    const c = localStorage.getItem(STORAGE.cards);
+    if (c) cards = JSON.parse(c);
+    const s = localStorage.getItem(STORAGE.settings);
+    if (s) {
+      const p = JSON.parse(s);
+      settings = { ...DEFAULT_SETTINGS, ...p, intervals: { ...DEFAULT_SETTINGS.intervals, ...(p.intervals || {}) } };
+    }
+    const st = localStorage.getItem(STORAGE.stats);
+    if (st) stats = { ...stats, ...JSON.parse(st) };
+    const ca = localStorage.getItem(STORAGE.cache);
+    if (ca) cache = JSON.parse(ca);
+  } catch (e) { console.warn('Load error:', e); }
+
+  cards.forEach(c => {
+    if (c.box === undefined) c.box = 1;
+    if (!c.nextReview) c.nextReview = today();
+    if (!c.createdAt) c.createdAt = today();
+    if (!c.history) c.history = [];
+  });
+};
+
+const fetchTranslation = async (word) => {
+  if (!settings.useApi) return null;
+  const key = word.toLowerCase();
+  if (cache[key]) return cache[key];
+
+  try {
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=de|fa`;
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 8000);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (data?.responseData?.translatedText) {
+      let text = data.responseData.translatedText.trim().replace(/^["']|["']$/g, '');
+      if (text.toLowerCase() === word.toLowerCase()) return null;
+      cache[key] = text;
+      save();
+      return text;
+    }
+    return null;
+  } catch (e) {
+    console.warn('Translation error:', e);
+    return null;
+  }
+};
+
+const recordReview = (isCorrect, isHard) => {
+  const d = today();
+  if (!stats.reviews[d]) stats.reviews[d] = { correct: 0, wrong: 0, hard: 0 };
+  if (isHard) stats.reviews[d].hard++;
+  else if (isCorrect) { stats.reviews[d].correct++; stats.totalCorrect++; }
+  else { stats.reviews[d].wrong++; stats.totalWrong++; }
+  stats.totalReviews++;
+
+  if (stats.lastReview !== d) {
+    stats.streak = (stats.lastReview === addDays(d, -1)) ? stats.streak + 1 : 1;
+    stats.lastReview = d;
+  }
+  save();
+};
+
+const getCardsInBox = (box) => cards.filter(c => c.box === box);
+const getBoxCount = (box) => cards.filter(c => c.box === box).length;
+
+const getTotalDue = () => {
+  const t = today();
+  return cards.filter(c => c.nextReview <= t).length;
+};
+
+const renderBoxes = () => {
+  const bar = $('boxesBar');
+  bar.innerHTML = '';
+  for (let b = 1; b <= 5; b++) {
+    const total = getBoxCount(b);
+    const chip = document.createElement('div');
+    chip.className = 'box-chip' + (activeBox === b ? ' active' : '');
+    chip.innerHTML = `
+      <div class="chip-label">باکس ${b}</div>
+      <div class="chip-count">${total}</div>
+    `;
+    chip.onclick = () => switchBox(b);
+    bar.appendChild(chip);
+  }
+};
+
+const buildSessionQueue = () => {
+  const boxCards = getCardsInBox(activeBox);
+  sessionQueue = shuffle(boxCards.map(c => c.id));
+  sessionPosition = 0;
+};
+
+const switchBox = (box) => {
+  activeBox = box;
+  currentCardId = null;
+  isFlipped = false;
+  buildSessionQueue();
+  renderBoxes();
+  showNextCard();
+};
+
+const updateButtons = () => {
+  const has = currentCardId !== null;
+  $('btnWrong').disabled = !has || !isFlipped;
+  $('btnHard').disabled = !has || !isFlipped;
+  $('btnGood').disabled = !has || !isFlipped;
+};
+
+const showEmptyCard = () => {
+  $('frontWord').textContent = '';
+  $('backArticle').style.display = 'none';
+  $('backWord').textContent = '';
+  $('backMeaning').textContent = '';
+  $('card').classList.remove('flipped', 'clickable');
+  $('reviewActions').classList.remove('visible');
+  currentCardId = null;
+  isFlipped = false;
+  updateButtons();
+};
+
+const renderCard = (card) => {
+  if (!card) { showEmptyCard(); return; }
+
+  $('frontWord').textContent = card.word || extractArticle(card.german).word || card.german;
+
+  const article = card.article || extractArticle(card.german).article;
+  if (article) {
+    $('backArticle').textContent = article;
+    $('backArticle').className = 'card-article ' + article;
+    $('backArticle').style.display = 'inline-block';
+  } else {
+    $('backArticle').style.display = 'none';
+  }
+
+  $('backWord').textContent = card.word || extractArticle(card.german).word || card.german;
+
+  if (card.persian) {
+    $('backMeaning').textContent = card.persian;
+    $('backMeaning').className = 'card-meaning';
+  } else if (!settings.useApi) {
+    $('backMeaning').textContent = 'معنی پیدا نشد';
+    $('backMeaning').className = 'card-meaning not-found';
+  } else {
+    $('backMeaning').textContent = '';
+    const wordToTranslate = card.word || extractArticle(card.german).word || card.german;
+    fetchTranslation(wordToTranslate).then(tr => {
+      if (tr) {
+        card.persian = tr;
+        save();
+        if (currentCardId === card.id) {
+          $('backMeaning').textContent = tr;
+          $('backMeaning').className = 'card-meaning';
+        }
+      } else {
+        if (currentCardId === card.id) {
+          $('backMeaning').textContent = 'معنی پیدا نشد';
+          $('backMeaning').className = 'card-meaning not-found';
+        }
+      }
+    });
+  }
+
+  $('card').classList.remove('flipped');
+  $('card').classList.add('clickable');
+  isFlipped = false;
+  $('reviewActions').classList.remove('visible');
+  updateButtons();
+};
+
+const showNextCard = () => {
+  if (sessionQueue.length === 0) {
+    showEmptyCard();
+    return;
+  }
+
+  if (sessionPosition >= sessionQueue.length) {
+    sessionPosition = 0;
+  }
+
+  let attempts = 0;
+  while (attempts < sessionQueue.length) {
+    const id = sessionQueue[sessionPosition];
+    const card = cards.find(c => c.id === id);
+
+    if (card && card.box === activeBox) {
+      currentCardId = card.id;
+      isFlipped = false;
+      renderCard(card);
+      return;
+    }
+
+    sessionQueue.splice(sessionPosition, 1);
+    attempts++;
+  }
+
+  sessionQueue = [];
+  sessionPosition = 0;
+  showEmptyCard();
+};
+
+const flipCard = () => {
+  if (!currentCardId) return;
+  isFlipped = !isFlipped;
+  $('card').classList.toggle('flipped', isFlipped);
+  $('reviewActions').classList.toggle('visible', isFlipped);
+  updateButtons();
+};
+
+const markGood = () => {
+  const card = cards.find(c => c.id === currentCardId);
+  if (!card) return;
+
+  const oldBox = card.box;
+  const newBox = Math.min(5, card.box + 1);
+  card.box = newBox;
+  card.nextReview = addDays(today(), settings.intervals[newBox]);
+  card.history.push({ date: today(), result: 'good', from: oldBox, to: newBox });
+  if (card.history.length > 100) card.history = card.history.slice(-100);
+
+  recordReview(true, false);
+  save();
+
+  showStatus('موفق', 'success');
+  renderBoxes();
+
+  const idx = sessionQueue.indexOf(card.id);
+  if (idx !== -1) sessionQueue.splice(idx, 1);
+  if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
+
+  currentCardId = null;
+  isFlipped = false;
+  showNextCard();
+};
+
+const markWrong = () => {
+  const card = cards.find(c => c.id === currentCardId);
+  if (!card) return;
+
+  const oldBox = card.box;
+  card.box = 1;
+  card.nextReview = addDays(today(), settings.intervals[1]);
+  card.history.push({ date: today(), result: 'wrong', from: oldBox, to: 1 });
+  if (card.history.length > 100) card.history = card.history.slice(-100);
+
+  recordReview(false, false);
+  save();
+
+  showStatus('موفق', 'success');
+  renderBoxes();
+
+  const idx = sessionQueue.indexOf(card.id);
+  if (idx !== -1) sessionQueue.splice(idx, 1);
+  if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
+
+  currentCardId = null;
+  isFlipped = false;
+  showNextCard();
+};
+
+const markHard = () => {
+  const card = cards.find(c => c.id === currentCardId);
+  if (!card) return;
+
+  recordReview(false, true);
+  save();
+
+  showStatus('موفق', 'success');
+
+  const idx = sessionQueue.indexOf(card.id);
+  if (idx !== -1) {
+    sessionQueue.splice(idx, 1);
+    sessionQueue.push(card.id);
+  }
+
+  if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
+
+  currentCardId = null;
+  isFlipped = false;
+  showNextCard();
+};
+
+let statusTimer = null;
+const showStatus = (msg, type = 'success') => {
+  const el = $('statusMsg');
+  el.textContent = msg;
+  const colors = { success: 'var(--success)', danger: 'var(--danger)', warning: 'var(--warning)', info: '#818cf8' };
+  el.style.color = colors[type] || colors.success;
+  if (statusTimer) clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => { el.textContent = ''; }, 2000);
+};
+
+const addCard = async () => {
+  const input = $('inputGerman');
+  const raw = input.value.trim();
+  if (!raw) { showStatus('کلمه را وارد کنید', 'danger'); return; }
+
+  if (cards.some(c => c.german.toLowerCase() === raw.toLowerCase())) {
+    showStatus('تکراری است', 'danger');
+    return;
+  }
+
+  const { article, word } = extractArticle(raw);
+
+  const card = {
+    id: uid(),
+    german: raw,
+    word: word || raw,
+    article: article,
+    persian: '',
+    box: 1,
+    nextReview: today(),
+    createdAt: today(),
+    history: []
+  };
+
+  cards.push(card);
+  save();
+  input.value = '';
+  input.focus();
+
+  fetchTranslation(word || raw).then(tr => {
+    if (tr) {
+      card.persian = tr;
+      save();
+    }
+  });
+
+  showStatus('موفق', 'success');
+  renderBoxes();
+
+  if (activeBox === 1 && !currentCardId) {
+    buildSessionQueue();
+    showNextCard();
+  }
+};
+
+const openStats = () => {
+  const total = stats.totalReviews;
+  const acc = total > 0 ? Math.round((stats.totalCorrect / total) * 100) : 0;
+  const todayStats = stats.reviews[today()] || { correct: 0, wrong: 0, hard: 0 };
+
+  $('statsGrid').innerHTML = `
+    <div class="stat-box"><div class="val">${cards.length}</div><div class="lbl">کل کارت‌ها</div></div>
+    <div class="stat-box warning"><div class="val">${getTotalDue()}</div><div class="lbl">سررسیده</div></div>
+    <div class="stat-box success"><div class="val">${getBoxCount(5)}</div><div class="lbl">تثبیت‌شده</div></div>
+    <div class="stat-box"><div class="val">${stats.streak}</div><div class="lbl">روز پیوسته</div></div>
+    <div class="stat-box success"><div class="val">${stats.totalCorrect}</div><div class="lbl">درست</div></div>
+    <div class="stat-box danger"><div class="val">${stats.totalWrong}</div><div class="lbl">اشتباه</div></div>
+    <div class="stat-box"><div class="val">${acc}%</div><div class="lbl">دقت</div></div>
+    <div class="stat-box"><div class="val">${todayStats.correct + todayStats.wrong + todayStats.hard}</div><div class="lbl">امروز</div></div>
+  `;
+
+  $('boxDistribution').innerHTML = [1,2,3,4,5].map(b => `
+    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:0.85rem;font-weight:600;">باکس ${b} (${BOX_LABELS[b]})</span>
+      <strong style="color:#818cf8;">${getBoxCount(b)}</strong>
+    </div>
+  `).join('');
+
+  $('statsModal').classList.add('show');
+};
+
+const openSettings = () => {
+  $('setI1').value = settings.intervals[1];
+  $('setI2').value = settings.intervals[2];
+  $('setI3').value = settings.intervals[3];
+  $('setI4').value = settings.intervals[4];
+  $('setI5').value = settings.intervals[5];
+  $('setApi').checked = settings.useApi;
+  $('settingsModal').classList.add('show');
+};
+
+const saveSettings = () => {
+  settings.intervals[1] = Math.max(1, parseInt($('setI1').value) || 1);
+  settings.intervals[2] = Math.max(1, parseInt($('setI2').value) || 2);
+  settings.intervals[3] = Math.max(1, parseInt($('setI3').value) || 4);
+  settings.intervals[4] = Math.max(1, parseInt($('setI4').value) || 7);
+  settings.intervals[5] = Math.max(1, parseInt($('setI5').value) || 14);
+  settings.useApi = $('setApi').checked;
+  save();
+  $('settingsModal').classList.remove('show');
+  showStatus('موفق', 'success');
+  renderBoxes();
+};
+
+const resetSettings = () => {
+  settings = { ...DEFAULT_SETTINGS, intervals: { ...DEFAULT_SETTINGS.intervals } };
+  save();
+  openSettings();
+  renderBoxes();
+  showStatus('موفق', 'success');
+};
+
+const applyTheme = () => {
+  document.documentElement.setAttribute('data-theme', settings.theme);
+  $('btnTheme').textContent = settings.theme === 'dark' ? '🌙' : '☀️';
+  // به‌روزرسانی theme-color مرورگر
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', settings.theme === 'dark' ? '#0b0f1a' : '#f8fafc');
+};
+
+const toggleTheme = () => {
+  settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  save();
+};
+
+const bind = () => {
+  $('card').onclick = (e) => {
+    if (e.target.closest('button')) return;
+    if (!currentCardId) return;
+    flipCard();
+  };
+
+  $('btnWrong').onclick = markWrong;
+  $('btnHard').onclick = markHard;
+  $('btnGood').onclick = markGood;
+
+  $('btnAdd').onclick = addCard;
+  $('inputGerman').onkeydown = (e) => { if (e.key === 'Enter') addCard(); };
+
+  $('btnStats').onclick = openStats;
+  $('btnCloseStats').onclick = () => $('statsModal').classList.remove('show');
+  $('statsModal').onclick = (e) => { if (e.target === $('statsModal')) $('statsModal').classList.remove('show'); };
+
+  $('btnSettings').onclick = openSettings;
+  $('btnSaveSettings').onclick = saveSettings;
+  $('btnResetSettings').onclick = resetSettings;
+  $('settingsModal').onclick = (e) => { if (e.target === $('settingsModal')) $('settingsModal').classList.remove('show'); };
+
+  $('btnTheme').onclick = toggleTheme;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (currentCardId) flipCard();
+    } else if (e.key === 'ArrowRight' || e.key === '1') {
+      if (isFlipped) markGood();
+    } else if (e.key === 'ArrowLeft' || e.key === '2') {
+      if (isFlipped) markWrong();
+    } else if (e.key === 'ArrowDown' || e.key === '3') {
+      if (isFlipped) markHard();
+    } else if (e.key === 'Escape') {
+      $('statsModal').classList.remove('show');
+      $('settingsModal').classList.remove('show');
+    }
+  });
+
+  window.addEventListener('beforeunload', save);
+  setInterval(save, 20000);
+};
+
+const init = () => {
+  load();
+  applyTheme();
+  bind();
+  renderBoxes();
+  buildSessionQueue();
+  showNextCard();
+
+  // اگر نصب شده، دکمه نصب را مخفی کن
+  if (isStandalone() && installBtn) installBtn.classList.add('hidden');
+};
+
+init();
+</script>
+</body>
+</html>
