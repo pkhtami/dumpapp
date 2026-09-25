@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>لایتنر آلمانی</title>
 
-<!-- ==================== PWA Meta Tags ==================== -->
 <meta name="description" content="لایتنر پنج‌باکسی برای یادگیری لغات آلمانی به فارسی">
 <meta name="theme-color" content="#0b0f1a">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14,9 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="لایتنر آلمانی">
 <meta name="application-name" content="لایتنر آلمانی">
 <meta name="msapplication-TileColor" content="#6366f1">
-<meta name="msapplication-tap-highlight" content="no">
 
-<!-- آیکون‌ها (SVG به‌صورت Data URI) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
 
@@ -177,7 +174,6 @@
     transform: translateY(-2px);
   }
 
-  /* دکمه نصب */
   #btnInstall {
     background: linear-gradient(135deg, #10b981, #059669);
     color: white;
@@ -497,9 +493,9 @@
     border: 1.5px solid var(--border-strong);
     border-radius: var(--radius);
     padding: 24px;
-    max-width: 460px;
+    max-width: 520px;
     width: 100%;
-    max-height: 85vh;
+    max-height: 88vh;
     overflow-y: auto;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     transform: scale(0.92);
@@ -543,118 +539,267 @@
   }
   .btn-ghost:hover { border-color: var(--border-strong); }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { background: #059669; transform: translateY(-2px); }
 
-  .stat-box {
-    background: var(--surface-2);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-    text-align: center;
-  }
-
-  .stat-box .val {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: #818cf8;
-    line-height: 1;
-  }
-
-  .stat-box .lbl {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-top: 6px;
-    font-weight: 600;
-  }
-
-  .stat-box.success .val { color: var(--success); }
-  .stat-box.danger .val { color: var(--danger); }
-  .stat-box.warning .val { color: var(--warning); }
-
-  .settings-list {
+  .manage-section {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 14px;
   }
 
-  .setting-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+  .box-selector {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
   }
 
-  .setting-row:last-child { border-bottom: none; }
-
-  .setting-row label {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text);
-    display: block;
-  }
-
-  .setting-row .hint {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    margin-top: 2px;
-    font-weight: 500;
-  }
-
-  .setting-row input[type="number"] {
-    width: 76px;
+  .box-sel-btn {
     background: var(--surface-2);
     border: 1.5px solid var(--border);
     border-radius: 10px;
-    padding: 9px 12px;
-    color: var(--text);
-    font-size: 0.9rem;
-    outline: none;
-    text-align: center;
+    padding: 8px 4px;
+    color: var(--text-muted);
+    cursor: pointer;
     font-family: inherit;
     font-weight: 700;
+    font-size: 0.75rem;
+    transition: all var(--transition);
+    text-align: center;
   }
 
-  .switch {
-    position: relative;
-    width: 48px;
-    height: 28px;
+  .box-sel-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+
+  .box-sel-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .box-sel-btn .cnt {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 900;
+    margin-top: 2px;
+  }
+
+  .word-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-left: 4px;
+  }
+
+  .word-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all var(--transition);
+  }
+
+  .word-item:hover {
+    border-color: var(--border-strong);
+  }
+
+  .word-item .w-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .word-item .w-german {
+    font-size: 0.9rem;
+    font-weight: 800;
+    direction: ltr;
+    text-align: left;
+    color: var(--text);
+    word-break: break-word;
+  }
+
+  .word-item .w-persian {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    word-break: break-word;
+  }
+
+  .word-item .w-actions {
+    display: flex;
+    gap: 4px;
     flex-shrink: 0;
   }
 
-  .switch input { opacity: 0; width: 0; height: 0; }
+  .word-item .w-actions button {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    color: white;
+  }
 
-  .switch-track {
-    position: absolute;
-    inset: 0;
-    background: var(--surface-3);
-    border-radius: 100px;
+  .w-edit { background: var(--accent); }
+  .w-edit:hover { background: #4f46e5; }
+  .w-del { background: var(--danger); }
+  .w-del:hover { background: #be123c; }
+
+  .empty-list {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    padding: 30px 10px;
+  }
+
+  .edit-word-display {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-weight: 800;
+    direction: ltr;
+    text-align: center;
+    color: var(--text);
+    margin-bottom: 14px;
+    word-break: break-word;
+  }
+
+  .edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .edit-field label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .edit-field input {
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    font-family: inherit;
+    transition: all var(--transition);
+  }
+
+  .edit-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .backup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .backup-section .info {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .backup-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .backup-btns button {
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .import-area {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .import-area.show { display: flex; }
+
+  .file-picker {
+    background: var(--surface-2);
+    border: 2px dashed var(--border-strong);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
     cursor: pointer;
     transition: all var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 
-  .switch-track::before {
-    content: '';
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: white;
-    top: 3px;
-    right: 3px;
-    transition: all var(--transition);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  .file-picker:hover {
+    border-color: var(--accent);
+    background: var(--surface-3);
   }
 
-  .switch input:checked + .switch-track { background: var(--accent); }
-  .switch input:checked + .switch-track::before { transform: translateX(-20px); }
+  .file-picker.has-file {
+    border-color: var(--success);
+    border-style: solid;
+    background: rgba(16, 185, 129, 0.08);
+  }
 
-  /* Toast راهنمای نصب */
+  .file-picker .file-icon {
+    font-size: 2rem;
+    opacity: 0.7;
+  }
+
+  .file-picker .file-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .file-picker .file-hint {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  .file-picker .file-name {
+    font-size: 0.8rem;
+    color: var(--success);
+    font-weight: 700;
+    word-break: break-all;
+    direction: ltr;
+  }
+
+  .import-info {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .import-info strong {
+    color: var(--success);
+    font-weight: 800;
+  }
+
   .install-toast {
     position: fixed;
     bottom: 20px;
@@ -761,7 +906,6 @@
     <div class="header-actions">
       <button class="icon-btn hidden" id="btnInstall" title="نصب برنامه">📲 <span>نصب</span></button>
       <button class="icon-btn" id="btnTheme" title="تغییر تم">🌙</button>
-      <button class="icon-btn" id="btnStats" title="آمار">📊</button>
       <button class="icon-btn" id="btnSettings" title="تنظیمات">⚙️</button>
     </div>
   </header>
@@ -815,167 +959,116 @@
 
 </div>
 
-<!-- Toast راهنمای نصب -->
 <div class="install-toast" id="installToast">
-  <span class="toast-text" id="toastText">این برنامه را روی دستگاه خود نصب کنید</span>
+  <span class="toast-text" id="toastText">این برنامه را نصب کنید</span>
   <button class="toast-action" id="toastAction">نصب</button>
   <button class="toast-close" id="toastClose">✕</button>
 </div>
 
-<div class="modal-overlay" id="statsModal">
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
   <div class="modal">
-    <h3>📊 آمار شما</h3>
-    <div class="stats-grid" id="statsGrid"></div>
-    <div style="margin-top:18px;">
-      <h4 style="color:#818cf8;font-size:0.85rem;margin-bottom:10px;font-weight:800;">توزیع در باکس‌ها</h4>
-      <div id="boxDistribution"></div>
+    <h3>⚙️ تنظیمات</h3>
+
+    <div class="manage-section">
+      <div style="font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:4px;">مدیریت کلمات</div>
+      <div class="box-selector" id="boxSelector"></div>
+      <div class="word-list" id="wordList"></div>
     </div>
+
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);" class="backup-section">
+      <div style="font-size:0.85rem;font-weight:700;color:var(--text);">پشتیبان‌گیری</div>
+      <div class="info">لغات خود را در یک فایل JSON ذخیره کنید یا از فایل پشتیبان بازیابی کنید.</div>
+      <div class="backup-btns">
+        <button class="btn btn-success" id="btnExport">📤 اکسپورت</button>
+        <button class="btn btn-primary" id="btnImportToggle">📥 اینپورت</button>
+      </div>
+      <div class="import-area" id="importArea">
+        <label class="file-picker" id="filePicker" for="fileInput">
+          <div class="file-icon">📁</div>
+          <div class="file-label">انتخاب فایل پشتیبان</div>
+          <div class="file-hint">فایل JSON را انتخاب کنید</div>
+          <div class="file-name" id="fileName" style="display:none;"></div>
+        </label>
+        <input type="file" id="fileInput" accept=".json,application/json" style="display:none;">
+        <div class="import-info" id="importInfo" style="display:none;"></div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" id="btnImportDo" style="flex:1;" disabled>بازیابی</button>
+          <button class="btn btn-ghost" id="btnImportCancel" style="flex:1;">لغو</button>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-actions">
-      <button class="btn btn-primary" id="btnCloseStats">بستن</button>
+      <button class="btn btn-ghost" id="btnCloseSettings">بستن</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="settingsModal">
+<!-- Edit Word Modal -->
+<div class="modal-overlay" id="editModal">
   <div class="modal">
-    <h3>⚙️ تنظیمات</h3>
-    <div class="settings-list">
-      <div class="setting-row">
-        <div><label>فاصله باکس ۱ (روز)</label><div class="hint">مرور روزانه</div></div>
-        <input type="number" id="setI1" min="1" value="1">
-      </div>
-      <div class="setting-row">
-        <div><label>فاصله باکس ۲ (روز)</label><div class="hint">پس از اولین پاسخ درست</div></div>
-        <input type="number" id="setI2" min="1" value="2">
-      </div>
-      <div class="setting-row">
-        <div><label>فاصله باکس ۳ (روز)</label><div class="hint">تثبیت متوسط</div></div>
-        <input type="number" id="setI3" min="1" value="4">
-      </div>
-      <div class="setting-row">
-        <div><label>فاصله باکس ۴ (روز)</label><div class="hint">تثبیت خوب</div></div>
-        <input type="number" id="setI4" min="1" value="7">
-      </div>
-      <div class="setting-row">
-        <div><label>فاصله باکس ۵ (روز)</label><div class="hint">تثبیت بلندمدت</div></div>
-        <input type="number" id="setI5" min="1" value="14">
-      </div>
-      <div class="setting-row">
-        <div><label>ترجمه خودکار</label><div class="hint">MyMemory رایگان</div></div>
-        <label class="switch">
-          <input type="checkbox" id="setApi">
-          <span class="switch-track"></span>
-        </label>
-      </div>
+    <h3>✏️ ویرایش ترجمه</h3>
+    <div class="edit-word-display" id="editWordDisplay"></div>
+    <div class="edit-field">
+      <label>آرتیکل (اختیاری)</label>
+      <input type="text" id="editArticle" placeholder="der / die / das" style="direction:ltr;text-align:left;">
+    </div>
+    <div class="edit-field">
+      <label>ترجمه فارسی</label>
+      <input type="text" id="editPersian" placeholder="معنی فارسی...">
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" id="btnResetSettings">بازنشانی</button>
-      <button class="btn btn-primary" id="btnSaveSettings">ذخیره</button>
+      <button class="btn btn-ghost" id="btnCancelEdit">لغو</button>
+      <button class="btn btn-primary" id="btnSaveEdit">ذخیره</button>
     </div>
   </div>
 </div>
 
 <script>
 /* ============================================================
-   PWA — Service Worker و Manifest به‌صورت Data URI
+   PWA Setup
    ============================================================ */
-
-/* ---------- ساخت Manifest به‌صورت Blob ---------- */
 const manifestData = {
-  name: "لایتنر آلمانی",
-  short_name: "لایتنر",
+  name: "لایتنر آلمانی", short_name: "لایتنر",
   description: "لایتنر پنج‌باکسی برای یادگیری لغات آلمانی به فارسی",
-  start_url: ".",
-  scope: ".",
-  display: "standalone",
-  orientation: "portrait",
-  background_color: "#0b0f1a",
-  theme_color: "#0b0f1a",
-  lang: "fa",
-  dir: "rtl",
-  icons: [
-    {
-      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E",
-      sizes: "512x512",
-      type: "image/svg+xml",
-      purpose: "any maskable"
-    },
-    {
-      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E",
-      sizes: "192x192",
-      type: "image/svg+xml",
-      purpose: "any maskable"
-    }
-  ]
+  start_url: ".", scope: ".", display: "standalone", orientation: "portrait",
+  background_color: "#0b0f1a", theme_color: "#0b0f1a", lang: "fa", dir: "rtl",
+  icons: [{
+    src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E",
+    sizes: "512x512", type: "image/svg+xml", purpose: "any maskable"
+  }]
 };
+const manifestURL = URL.createObjectURL(new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' }));
+const ml = document.createElement('link'); ml.rel = 'manifest'; ml.href = manifestURL; document.head.appendChild(ml);
 
-const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
-const manifestURL = URL.createObjectURL(manifestBlob);
-
-const manifestLink = document.createElement('link');
-manifestLink.rel = 'manifest';
-manifestLink.href = manifestURL;
-document.head.appendChild(manifestLink);
-
-/* ---------- ثبت Service Worker به‌صورت Blob ---------- */
 const swCode = `
-  const CACHE_NAME = 'leitner-de-v1';
-  const ASSETS = ['./'];
-
-  self.addEventListener('install', (event) => {
-    self.skipWaiting();
-    event.waitUntil(
-      caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS).catch(() => {}))
-    );
-  });
-
-  self.addEventListener('activate', (event) => {
-    event.waitUntil(
-      caches.keys().then((keys) =>
-        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-      ).then(() => self.clients.claim())
-    );
-  });
-
-  self.addEventListener('fetch', (event) => {
-    if (event.request.method !== 'GET') return;
-    const url = new URL(event.request.url);
-
-    // درخواست‌های API را کش نکن
-    if (url.hostname.includes('mymemory')) return;
-
-    event.respondWith(
-      caches.match(event.request).then((cached) => {
-        const fetchPromise = fetch(event.request).then((response) => {
-          if (response && response.status === 200 && response.type === 'basic') {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return response;
-        }).catch(() => cached);
-        return cached || fetchPromise;
-      })
-    );
-  });
+const CACHE_NAME = 'leitner-de-v3';
+self.addEventListener('install', (e) => { self.skipWaiting(); e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(['./']).catch(()=>{}))); });
+self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
+self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
+  const url = new URL(e.request.url);
+  if (url.hostname.includes('mymemory')) return;
+  e.respondWith(caches.match(e.request).then(cached => {
+    const fetchP = fetch(e.request).then(res => {
+      if (res && res.status === 200 && res.type === 'basic') {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+      }
+      return res;
+    }).catch(() => cached);
+    return cached || fetchP;
+  }));
+});
 `;
-
 if ('serviceWorker' in navigator) {
   try {
-    const swBlob = new Blob([swCode], { type: 'application/javascript' });
-    const swURL = URL.createObjectURL(swBlob);
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register(swURL, { scope: './' })
-        .then(() => console.log('✅ Service Worker ثبت شد'))
-        .catch((err) => console.warn('SW registration failed:', err));
-    });
-  } catch (e) {
-    console.warn('SW setup error:', e);
-  }
+    const swURL = URL.createObjectURL(new Blob([swCode], { type: 'application/javascript' }));
+    window.addEventListener('load', () => navigator.serviceWorker.register(swURL, { scope: './' }).catch(() => {}));
+  } catch (e) {}
 }
 
-/* ============================================================
-   نصب PWA — مدیریت رویداد beforeinstallprompt
-   ============================================================ */
 let deferredPrompt = null;
 const installBtn = document.getElementById('btnInstall');
 const installToast = document.getElementById('installToast');
@@ -983,171 +1076,94 @@ const toastText = document.getElementById('toastText');
 const toastAction = document.getElementById('toastAction');
 const toastClose = document.getElementById('toastClose');
 
-// تشخیص نصب بودن
-const isStandalone = () => {
-  return window.matchMedia('(display-mode: standalone)').matches
-    || window.navigator.standalone === true
-    || document.referrer.includes('android-app://');
-};
-
-// تشخیص iOS
+const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
 
-// تشخیص اندروید
-const isAndroid = () => /android/i.test(navigator.userAgent);
-
-// رویداد قبل از نصب (اندروید/کروم/اج)
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  // نمایش دکمه نصب
   if (installBtn) installBtn.classList.remove('hidden');
-  // نمایش Toast
   showInstallToast('برنامه را نصب کنید و آفلاین استفاده کنید', 'نصب');
 });
 
-// رویداد نصب موفق
 window.addEventListener('appinstalled', () => {
-  console.log('✅ PWA نصب شد');
   deferredPrompt = null;
   if (installBtn) installBtn.classList.add('hidden');
   hideInstallToast();
   showToastMessage('برنامه با موفقیت نصب شد');
 });
 
-// دکمه نصب در هدر
-if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    await triggerInstall();
-  });
-}
-
-// دکمه نصب در Toast
-if (toastAction) {
-  toastAction.addEventListener('click', async () => {
-    await triggerInstall();
-  });
-}
-
-if (toastClose) {
-  toastClose.addEventListener('click', () => {
-    hideInstallToast();
-    // ذخیره که کاربر رد کرده تا ۷ روز دیگر نشان نده
-    localStorage.setItem('install_dismissed', Date.now().toString());
-  });
-}
+if (installBtn) installBtn.addEventListener('click', triggerInstall);
+if (toastAction) toastAction.addEventListener('click', triggerInstall);
+if (toastClose) toastClose.addEventListener('click', () => {
+  hideInstallToast();
+  localStorage.setItem('install_dismissed', Date.now().toString());
+});
 
 async function triggerInstall() {
   if (deferredPrompt) {
-    // اندروید/کروم/اج — از prompt بومی استفاده کن
     deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('Install outcome:', outcome);
+    await deferredPrompt.userChoice;
     deferredPrompt = null;
     if (installBtn) installBtn.classList.add('hidden');
     hideInstallToast();
   } else if (isIOS()) {
-    // iOS — راهنمای دستی
-    showToastMessage('در Safari روی دکمه Share بزنید و «Add to Home Screen» را انتخاب کنید', 6000);
+    showToastMessage('در Safari روی Share بزنید و Add to Home Screen را انتخاب کنید', 6000);
   } else {
-    // سایر مرورگرها — راهنمای دستی
-    showToastMessage('از منوی مرورگر گزینه «Install app» یا «Add to Home Screen» را انتخاب کنید', 6000);
+    showToastMessage('از منوی مرورگر Install app را انتخاب کنید', 6000);
   }
 }
 
 function showInstallToast(text, actionLabel) {
-  // اگر کاربر قبلاً رد کرده، نشان نده
-  const dismissed = localStorage.getItem('install_dismissed');
-  if (dismissed) {
-    const daysSince = (Date.now() - parseInt(dismissed)) / (1000 * 60 * 60 * 24);
-    if (daysSince < 7) return;
-  }
-  // اگر نصب شده، نشان نده
+  const d = localStorage.getItem('install_dismissed');
+  if (d) { const days = (Date.now() - parseInt(d)) / 86400000; if (days < 7) return; }
   if (isStandalone()) return;
-
   toastText.textContent = text;
   toastAction.textContent = actionLabel || 'نصب';
   installToast.classList.add('show');
-  // بعد از ۱۵ ثانیه خودکار مخفی شود
   setTimeout(() => hideInstallToast(), 15000);
 }
+function hideInstallToast() { installToast.classList.remove('show'); }
 
-function hideInstallToast() {
-  installToast.classList.remove('show');
-}
-
-/* Toast عمومی برای پیام */
 function showToastMessage(msg, duration = 3000) {
   const existing = document.getElementById('generic-toast');
   if (existing) existing.remove();
-
   const toast = document.createElement('div');
   toast.id = 'generic-toast';
   toast.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(120%);
-    background: var(--surface);
-    border: 1.5px solid var(--accent);
-    border-radius: 12px;
-    padding: 14px 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    z-index: 2000;
-    max-width: calc(100% - 32px);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    text-align: center;
-    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    direction: rtl;
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(120%);
+    background: var(--surface); border: 1.5px solid var(--accent); border-radius: 12px;
+    padding: 14px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 2000;
+    max-width: calc(100% - 32px); font-size: 0.85rem; font-weight: 600; color: var(--text);
+    text-align: center; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); direction: rtl;
   `;
   toast.textContent = msg;
   document.body.appendChild(toast);
-
-  requestAnimationFrame(() => {
-    toast.style.transform = 'translateX(-50%) translateY(0)';
-  });
-
+  requestAnimationFrame(() => toast.style.transform = 'translateX(-50%) translateY(0)');
   setTimeout(() => {
     toast.style.transform = 'translateX(-50%) translateY(120%)';
     setTimeout(() => toast.remove(), 400);
   }, duration);
 }
 
-/* نمایش راهنمای نصب در iOS (چون beforeinstallprompt پشتیبانی نمی‌شود) */
-if (isIOS() && !isStandalone()) {
-  setTimeout(() => {
-    showInstallToast('برای نصب: Share → Add to Home Screen', 'راهنما');
-  }, 3000);
-}
-
-/* اگر مرورگر از PWA پشتیبانی می‌کند ولی beforeinstallprompt نیامده،
-   بعد از ۵ ثانیه Toast راهنما نشان بده */
-setTimeout(() => {
-  if (!deferredPrompt && !isStandalone() && !isIOS()) {
-    showInstallToast('این برنامه را روی دستگاه خود نصب کنید', 'راهنما');
-  }
-}, 5000);
+if (isIOS() && !isStandalone()) setTimeout(() => showInstallToast('برای نصب: Share → Add to Home Screen', 'راهنما'), 3000);
+setTimeout(() => { if (!deferredPrompt && !isStandalone() && !isIOS()) showInstallToast('این برنامه را نصب کنید', 'راهنما'); }, 5000);
 
 /* ============================================================
-   لایتنر پنج‌باکسی آلمانی
+   لایتنر آلمانی
    ============================================================ */
 
 const STORAGE = {
-  cards: 'leitner_de_v8',
-  settings: 'leitner_de_settings_v8',
-  stats: 'leitner_de_stats_v8',
-  cache: 'leitner_de_cache_v8'
+  cards: 'leitner_de_v11',
+  settings: 'leitner_de_settings_v11',
+  stats: 'leitner_de_stats_v11',
+  cache: 'leitner_de_cache_v11'
 };
 
 const DEFAULT_SETTINGS = {
   intervals: { 1: 1, 2: 2, 3: 4, 4: 7, 5: 14 },
-  useApi: true,
   theme: 'dark'
 };
-
-const BOX_LABELS = { 1: 'روزانه', 2: '۲روزه', 3: '۴روزه', 4: '۷روزه', 5: '۱۴روزه' };
 
 let cards = [];
 let settings = { ...DEFAULT_SETTINGS, intervals: { ...DEFAULT_SETTINGS.intervals } };
@@ -1157,9 +1173,15 @@ let cache = {};
 let activeBox = 1;
 let currentCardId = null;
 let isFlipped = false;
-
 let sessionQueue = [];
 let sessionPosition = 0;
+
+let settingsSelectedBox = 1;
+let editingCardId = null;
+let pendingImportData = null;
+
+/* قفل تعویض کارت */
+let isTransitioning = false;
 
 const $ = (id) => document.getElementById(id);
 
@@ -1167,13 +1189,11 @@ const today = () => {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 };
-
 const addDays = (dateStr, days) => {
   const d = new Date(dateStr + 'T00:00:00');
   d.setDate(d.getDate() + days);
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 };
-
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
 const extractArticle = (german) => {
@@ -1225,7 +1245,6 @@ const load = () => {
 };
 
 const fetchTranslation = async (word) => {
-  if (!settings.useApi) return null;
   const key = word.toLowerCase();
   if (cache[key]) return cache[key];
 
@@ -1258,7 +1277,6 @@ const recordReview = (isCorrect, isHard) => {
   else if (isCorrect) { stats.reviews[d].correct++; stats.totalCorrect++; }
   else { stats.reviews[d].wrong++; stats.totalWrong++; }
   stats.totalReviews++;
-
   if (stats.lastReview !== d) {
     stats.streak = (stats.lastReview === addDays(d, -1)) ? stats.streak + 1 : 1;
     stats.lastReview = d;
@@ -1268,11 +1286,6 @@ const recordReview = (isCorrect, isHard) => {
 
 const getCardsInBox = (box) => cards.filter(c => c.box === box);
 const getBoxCount = (box) => cards.filter(c => c.box === box).length;
-
-const getTotalDue = () => {
-  const t = today();
-  return cards.filter(c => c.nextReview <= t).length;
-};
 
 const renderBoxes = () => {
   const bar = $('boxesBar');
@@ -1302,7 +1315,7 @@ const switchBox = (box) => {
   isFlipped = false;
   buildSessionQueue();
   renderBoxes();
-  showNextCard();
+  showNextCard(0);
 };
 
 const updateButtons = () => {
@@ -1312,11 +1325,18 @@ const updateButtons = () => {
   $('btnGood').disabled = !has || !isFlipped;
 };
 
-const showEmptyCard = () => {
+const clearCardContent = () => {
   $('frontWord').textContent = '';
+  $('backArticle').textContent = '';
   $('backArticle').style.display = 'none';
+  $('backArticle').className = 'card-article';
   $('backWord').textContent = '';
   $('backMeaning').textContent = '';
+  $('backMeaning').className = 'card-meaning';
+};
+
+const showEmptyCard = () => {
+  clearCardContent();
   $('card').classList.remove('flipped', 'clickable');
   $('reviewActions').classList.remove('visible');
   currentCardId = null;
@@ -1324,8 +1344,9 @@ const showEmptyCard = () => {
   updateButtons();
 };
 
-const renderCard = (card) => {
-  if (!card) { showEmptyCard(); return; }
+/* رندر همگام کارت — بدون درخواست async */
+const renderCardSync = (card) => {
+  clearCardContent();
 
   $('frontWord').textContent = card.word || extractArticle(card.german).word || card.german;
 
@@ -1334,8 +1355,6 @@ const renderCard = (card) => {
     $('backArticle').textContent = article;
     $('backArticle').className = 'card-article ' + article;
     $('backArticle').style.display = 'inline-block';
-  } else {
-    $('backArticle').style.display = 'none';
   }
 
   $('backWord').textContent = card.word || extractArticle(card.german).word || card.german;
@@ -1343,27 +1362,9 @@ const renderCard = (card) => {
   if (card.persian) {
     $('backMeaning').textContent = card.persian;
     $('backMeaning').className = 'card-meaning';
-  } else if (!settings.useApi) {
+  } else {
     $('backMeaning').textContent = 'معنی پیدا نشد';
     $('backMeaning').className = 'card-meaning not-found';
-  } else {
-    $('backMeaning').textContent = '';
-    const wordToTranslate = card.word || extractArticle(card.german).word || card.german;
-    fetchTranslation(wordToTranslate).then(tr => {
-      if (tr) {
-        card.persian = tr;
-        save();
-        if (currentCardId === card.id) {
-          $('backMeaning').textContent = tr;
-          $('backMeaning').className = 'card-meaning';
-        }
-      } else {
-        if (currentCardId === card.id) {
-          $('backMeaning').textContent = 'معنی پیدا نشد';
-          $('backMeaning').className = 'card-meaning not-found';
-        }
-      }
-    });
   }
 
   $('card').classList.remove('flipped');
@@ -1373,35 +1374,65 @@ const renderCard = (card) => {
   updateButtons();
 };
 
-const showNextCard = () => {
-  if (sessionQueue.length === 0) {
-    showEmptyCard();
-    return;
-  }
+/* نمایش کارت بعدی با تأخیر اختیاری */
+const showNextCard = async (delay = 0) => {
+  if (isTransitioning) return;
+  isTransitioning = true;
 
-  if (sessionPosition >= sessionQueue.length) {
-    sessionPosition = 0;
-  }
+  try {
+    // ۱. پاک‌سازی فوری کارت قبلی
+    clearCardContent();
+    $('card').classList.remove('flipped', 'clickable');
+    $('reviewActions').classList.remove('visible');
+    currentCardId = null;
+    isFlipped = false;
+    updateButtons();
 
-  let attempts = 0;
-  while (attempts < sessionQueue.length) {
-    const id = sessionQueue[sessionPosition];
-    const card = cards.find(c => c.id === id);
-
-    if (card && card.box === activeBox) {
-      currentCardId = card.id;
-      isFlipped = false;
-      renderCard(card);
-      return;
+    // ۲. تأخیر قبل از نمایش کارت بعدی
+    if (delay > 0) {
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
 
-    sessionQueue.splice(sessionPosition, 1);
-    attempts++;
-  }
+    // ۳. اگر صف خالی است، خارج شو
+    if (sessionQueue.length === 0) {
+      isTransitioning = false;
+      return;
+    }
+    if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
 
-  sessionQueue = [];
-  sessionPosition = 0;
-  showEmptyCard();
+    // ۴. اولین کارت معتبر را پیدا کن
+    let attempts = 0;
+    while (attempts < sessionQueue.length) {
+      const id = sessionQueue[sessionPosition];
+      const card = cards.find(c => c.id === id);
+
+      if (card && card.box === activeBox) {
+        // اگر معنی ندارد، قبل از نمایش از API بگیر
+        if (!card.persian) {
+          const wordToTranslate = card.word || extractArticle(card.german).word || card.german;
+          const tr = await fetchTranslation(wordToTranslate);
+          if (tr) { card.persian = tr; save(); }
+        }
+
+        // رندر کارت با معنی کامل
+        currentCardId = card.id;
+        isFlipped = false;
+        renderCardSync(card);
+        isTransitioning = false;
+        return;
+      }
+
+      sessionQueue.splice(sessionPosition, 1);
+      attempts++;
+    }
+
+    // هیچ کارت معتبری پیدا نشد
+    sessionQueue = [];
+    sessionPosition = 0;
+    showEmptyCard();
+  } finally {
+    isTransitioning = false;
+  }
 };
 
 const flipCard = () => {
@@ -1410,6 +1441,20 @@ const flipCard = () => {
   $('card').classList.toggle('flipped', isFlipped);
   $('reviewActions').classList.toggle('visible', isFlipped);
   updateButtons();
+};
+
+/* ==================== پاسخ‌ها با تأخیر نیم‌ثانیه ==================== */
+
+const afterAnswer = () => {
+  // پاک‌سازی فوری و برگرداندن کارت به حالت رو
+  clearCardContent();
+  $('card').classList.remove('flipped', 'clickable');
+  $('reviewActions').classList.remove('visible');
+  currentCardId = null;
+  isFlipped = false;
+  updateButtons();
+  // نمایش کارت بعدی با تأخیر نیم‌ثانیه
+  showNextCard(250);
 };
 
 const markGood = () => {
@@ -1425,7 +1470,6 @@ const markGood = () => {
 
   recordReview(true, false);
   save();
-
   showStatus('موفق', 'success');
   renderBoxes();
 
@@ -1433,9 +1477,7 @@ const markGood = () => {
   if (idx !== -1) sessionQueue.splice(idx, 1);
   if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
 
-  currentCardId = null;
-  isFlipped = false;
-  showNextCard();
+  afterAnswer();
 };
 
 const markWrong = () => {
@@ -1450,7 +1492,6 @@ const markWrong = () => {
 
   recordReview(false, false);
   save();
-
   showStatus('موفق', 'success');
   renderBoxes();
 
@@ -1458,9 +1499,7 @@ const markWrong = () => {
   if (idx !== -1) sessionQueue.splice(idx, 1);
   if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
 
-  currentCardId = null;
-  isFlipped = false;
-  showNextCard();
+  afterAnswer();
 };
 
 const markHard = () => {
@@ -1469,27 +1508,21 @@ const markHard = () => {
 
   recordReview(false, true);
   save();
-
   showStatus('موفق', 'success');
 
+  // انتقال به انتهای صف
   const idx = sessionQueue.indexOf(card.id);
-  if (idx !== -1) {
-    sessionQueue.splice(idx, 1);
-    sessionQueue.push(card.id);
-  }
-
+  if (idx !== -1) { sessionQueue.splice(idx, 1); sessionQueue.push(card.id); }
   if (sessionPosition >= sessionQueue.length) sessionPosition = 0;
 
-  currentCardId = null;
-  isFlipped = false;
-  showNextCard();
+  afterAnswer();
 };
 
 let statusTimer = null;
 const showStatus = (msg, type = 'success') => {
   const el = $('statusMsg');
   el.textContent = msg;
-  const colors = { success: 'var(--success)', danger: 'var(--danger)', warning: 'var(--warning)', info: '#818cf8' };
+  const colors = { success: 'var(--success)', danger: 'var(--danger)', warning: 'var(--warning)' };
   el.style.color = colors[type] || colors.success;
   if (statusTimer) clearTimeout(statusTimer);
   statusTimer = setTimeout(() => { el.textContent = ''; }, 2000);
@@ -1499,110 +1532,263 @@ const addCard = async () => {
   const input = $('inputGerman');
   const raw = input.value.trim();
   if (!raw) { showStatus('کلمه را وارد کنید', 'danger'); return; }
-
   if (cards.some(c => c.german.toLowerCase() === raw.toLowerCase())) {
-    showStatus('تکراری است', 'danger');
-    return;
+    showStatus('تکراری است', 'danger'); return;
   }
-
   const { article, word } = extractArticle(raw);
-
   const card = {
-    id: uid(),
-    german: raw,
-    word: word || raw,
-    article: article,
-    persian: '',
-    box: 1,
-    nextReview: today(),
-    createdAt: today(),
-    history: []
+    id: uid(), german: raw, word: word || raw, article: article,
+    persian: '', box: 1, nextReview: today(), createdAt: today(), history: []
   };
-
   cards.push(card);
   save();
   input.value = '';
   input.focus();
 
-  fetchTranslation(word || raw).then(tr => {
-    if (tr) {
-      card.persian = tr;
-      save();
-    }
-  });
+  fetchTranslation(word || raw).then(tr => { if (tr) { card.persian = tr; save(); } });
 
   showStatus('موفق', 'success');
   renderBoxes();
-
   if (activeBox === 1 && !currentCardId) {
     buildSessionQueue();
-    showNextCard();
+    showNextCard(0);
   }
 };
 
-const openStats = () => {
-  const total = stats.totalReviews;
-  const acc = total > 0 ? Math.round((stats.totalCorrect / total) * 100) : 0;
-  const todayStats = stats.reviews[today()] || { correct: 0, wrong: 0, hard: 0 };
-
-  $('statsGrid').innerHTML = `
-    <div class="stat-box"><div class="val">${cards.length}</div><div class="lbl">کل کارت‌ها</div></div>
-    <div class="stat-box warning"><div class="val">${getTotalDue()}</div><div class="lbl">سررسیده</div></div>
-    <div class="stat-box success"><div class="val">${getBoxCount(5)}</div><div class="lbl">تثبیت‌شده</div></div>
-    <div class="stat-box"><div class="val">${stats.streak}</div><div class="lbl">روز پیوسته</div></div>
-    <div class="stat-box success"><div class="val">${stats.totalCorrect}</div><div class="lbl">درست</div></div>
-    <div class="stat-box danger"><div class="val">${stats.totalWrong}</div><div class="lbl">اشتباه</div></div>
-    <div class="stat-box"><div class="val">${acc}%</div><div class="lbl">دقت</div></div>
-    <div class="stat-box"><div class="val">${todayStats.correct + todayStats.wrong + todayStats.hard}</div><div class="lbl">امروز</div></div>
-  `;
-
-  $('boxDistribution').innerHTML = [1,2,3,4,5].map(b => `
-    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);">
-      <span style="font-size:0.85rem;font-weight:600;">باکس ${b} (${BOX_LABELS[b]})</span>
-      <strong style="color:#818cf8;">${getBoxCount(b)}</strong>
-    </div>
-  `).join('');
-
-  $('statsModal').classList.add('show');
-};
-
+/* ==================== Settings ==================== */
 const openSettings = () => {
-  $('setI1').value = settings.intervals[1];
-  $('setI2').value = settings.intervals[2];
-  $('setI3').value = settings.intervals[3];
-  $('setI4').value = settings.intervals[4];
-  $('setI5').value = settings.intervals[5];
-  $('setApi').checked = settings.useApi;
+  settingsSelectedBox = 1;
+  renderBoxSelector();
+  renderWordList();
+  $('importArea').classList.remove('show');
+  $('fileInput').value = '';
+  $('fileName').style.display = 'none';
+  $('fileName').textContent = '';
+  $('importInfo').style.display = 'none';
+  $('importInfo').textContent = '';
+  $('filePicker').classList.remove('has-file');
+  $('btnImportDo').disabled = true;
+  pendingImportData = null;
   $('settingsModal').classList.add('show');
 };
 
-const saveSettings = () => {
-  settings.intervals[1] = Math.max(1, parseInt($('setI1').value) || 1);
-  settings.intervals[2] = Math.max(1, parseInt($('setI2').value) || 2);
-  settings.intervals[3] = Math.max(1, parseInt($('setI3').value) || 4);
-  settings.intervals[4] = Math.max(1, parseInt($('setI4').value) || 7);
-  settings.intervals[5] = Math.max(1, parseInt($('setI5').value) || 14);
-  settings.useApi = $('setApi').checked;
-  save();
-  $('settingsModal').classList.remove('show');
-  showStatus('موفق', 'success');
-  renderBoxes();
+const renderBoxSelector = () => {
+  const sel = $('boxSelector');
+  sel.innerHTML = '';
+  for (let b = 1; b <= 5; b++) {
+    const count = getBoxCount(b);
+    const btn = document.createElement('button');
+    btn.className = 'box-sel-btn' + (settingsSelectedBox === b ? ' active' : '');
+    btn.innerHTML = `باکس ${b}<span class="cnt">${count}</span>`;
+    btn.onclick = () => {
+      settingsSelectedBox = b;
+      renderBoxSelector();
+      renderWordList();
+    };
+    sel.appendChild(btn);
+  }
 };
 
-const resetSettings = () => {
-  settings = { ...DEFAULT_SETTINGS, intervals: { ...DEFAULT_SETTINGS.intervals } };
-  save();
-  openSettings();
-  renderBoxes();
-  showStatus('موفق', 'success');
+const renderWordList = () => {
+  const list = $('wordList');
+  const boxCards = getCardsInBox(settingsSelectedBox);
+  if (boxCards.length === 0) {
+    list.innerHTML = '<div class="empty-list">واژه‌ای در این باکس نیست</div>';
+    return;
+  }
+  list.innerHTML = '';
+  boxCards.forEach(card => {
+    const item = document.createElement('div');
+    item.className = 'word-item';
+    item.innerHTML = `
+      <div class="w-info">
+        <div class="w-german">${escapeHtml(card.german)}</div>
+        <div class="w-persian">${escapeHtml(card.persian || '—')}</div>
+      </div>
+      <div class="w-actions">
+        <button class="w-edit" title="ویرایش">✏️</button>
+        <button class="w-del" title="حذف">🗑️</button>
+      </div>
+    `;
+    item.querySelector('.w-edit').onclick = () => openEditModal(card.id);
+    item.querySelector('.w-del').onclick = () => deleteCard(card.id);
+    list.appendChild(item);
+  });
 };
 
+const escapeHtml = (s) => String(s || '')
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+const openEditModal = (cardId) => {
+  const card = cards.find(c => c.id === cardId);
+  if (!card) return;
+  editingCardId = cardId;
+  const article = card.article || extractArticle(card.german).article;
+  $('editWordDisplay').textContent = card.german;
+  $('editArticle').value = article || '';
+  $('editPersian').value = card.persian || '';
+  $('editModal').classList.add('show');
+  setTimeout(() => $('editPersian').focus(), 100);
+};
+
+const saveEdit = () => {
+  const card = cards.find(c => c.id === editingCardId);
+  if (!card) return;
+  const newArticle = $('editArticle').value.trim().toLowerCase();
+  const newPersian = $('editPersian').value.trim();
+
+  if (newArticle && /^(der|die|das)$/.test(newArticle)) {
+    const { word } = extractArticle(card.german);
+    card.article = newArticle;
+    card.german = newArticle + ' ' + word;
+    card.word = word;
+  } else if (!newArticle) {
+    const { word } = extractArticle(card.german);
+    card.article = '';
+    card.german = word;
+    card.word = word;
+  }
+
+  if (newPersian) {
+    card.persian = newPersian;
+    const key = (card.word || card.german).toLowerCase();
+    cache[key] = newPersian;
+  }
+
+  save();
+  showToastMessage('ذخیره شد');
+  $('editModal').classList.remove('show');
+  renderWordList();
+
+  if (currentCardId === card.id) renderCardSync(card);
+};
+
+const deleteCard = (cardId) => {
+  if (!confirm('این واژه حذف شود؟')) return;
+  cards = cards.filter(c => c.id !== cardId);
+  const idx = sessionQueue.indexOf(cardId);
+  if (idx !== -1) sessionQueue.splice(idx, 1);
+  save();
+  renderWordList();
+  renderBoxSelector();
+  renderBoxes();
+  if (currentCardId === cardId) {
+    currentCardId = null;
+    isFlipped = false;
+    showNextCard(0);
+  }
+  showToastMessage('حذف شد');
+};
+
+/* ==================== Export ==================== */
+const exportCards = () => {
+  const data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    cards: cards.map(c => ({
+      german: c.german,
+      word: c.word,
+      article: c.article,
+      persian: c.persian,
+      box: c.box,
+      nextReview: c.nextReview,
+      createdAt: c.createdAt
+    }))
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `leitner-backup-${today()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToastMessage('فایل پشتیبان دانلود شد');
+};
+
+/* ==================== Import ==================== */
+const handleFileSelect = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    try {
+      const data = JSON.parse(event.target.result);
+      if (!data.cards || !Array.isArray(data.cards)) {
+        showToastMessage('فایل نامعتبر است', 2500);
+        $('filePicker').classList.remove('has-file');
+        $('fileName').style.display = 'none';
+        $('importInfo').style.display = 'none';
+        $('btnImportDo').disabled = true;
+        pendingImportData = null;
+        return;
+      }
+      pendingImportData = data;
+      $('filePicker').classList.add('has-file');
+      $('fileName').style.display = 'block';
+      $('fileName').textContent = file.name;
+      const validCount = data.cards.filter(c => c.german).length;
+      $('importInfo').style.display = 'block';
+      $('importInfo').innerHTML = `فایل انتخاب شد: <strong>${validCount}</strong> واژه آماده بازیابی.`;
+      $('btnImportDo').disabled = false;
+    } catch (err) {
+      showToastMessage('خطا در خواندن فایل', 2500);
+      $('filePicker').classList.remove('has-file');
+      $('fileName').style.display = 'none';
+      $('importInfo').style.display = 'none';
+      $('btnImportDo').disabled = true;
+      pendingImportData = null;
+    }
+  };
+  reader.readAsText(file);
+};
+
+const doImport = () => {
+  if (!pendingImportData) return;
+  const data = pendingImportData;
+  let added = 0, skipped = 0;
+  data.cards.forEach(c => {
+    if (!c.german) return;
+    if (cards.some(x => x.german.toLowerCase() === c.german.toLowerCase())) {
+      skipped++; return;
+    }
+    const { article, word } = extractArticle(c.german);
+    cards.push({
+      id: uid(),
+      german: c.german,
+      word: c.word || word || c.german,
+      article: c.article || article || '',
+      persian: c.persian || '',
+      box: Math.min(5, Math.max(1, parseInt(c.box) || 1)),
+      nextReview: c.nextReview || today(),
+      createdAt: c.createdAt || today(),
+      history: []
+    });
+    added++;
+  });
+  save();
+  renderBoxes();
+  buildSessionQueue();
+  renderWordList();
+  renderBoxSelector();
+  $('importArea').classList.remove('show');
+  $('fileInput').value = '';
+  $('fileName').style.display = 'none';
+  $('importInfo').style.display = 'none';
+  $('filePicker').classList.remove('has-file');
+  $('btnImportDo').disabled = true;
+  pendingImportData = null;
+  showToastMessage(`${added} واژه اضافه شد${skipped ? ` — ${skipped} تکراری` : ''}`, 3500);
+};
+
+/* ==================== Theme ==================== */
 const applyTheme = () => {
   document.documentElement.setAttribute('data-theme', settings.theme);
   $('btnTheme').textContent = settings.theme === 'dark' ? '🌙' : '☀️';
-  // به‌روزرسانی theme-color مرورگر
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-  if (metaTheme) metaTheme.setAttribute('content', settings.theme === 'dark' ? '#0b0f1a' : '#f8fafc');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', settings.theme === 'dark' ? '#0b0f1a' : '#f8fafc');
 };
 
 const toggleTheme = () => {
@@ -1611,30 +1797,42 @@ const toggleTheme = () => {
   save();
 };
 
+/* ==================== Events ==================== */
 const bind = () => {
   $('card').onclick = (e) => {
     if (e.target.closest('button')) return;
     if (!currentCardId) return;
     flipCard();
   };
-
   $('btnWrong').onclick = markWrong;
   $('btnHard').onclick = markHard;
   $('btnGood').onclick = markGood;
-
   $('btnAdd').onclick = addCard;
   $('inputGerman').onkeydown = (e) => { if (e.key === 'Enter') addCard(); };
-
-  $('btnStats').onclick = openStats;
-  $('btnCloseStats').onclick = () => $('statsModal').classList.remove('show');
-  $('statsModal').onclick = (e) => { if (e.target === $('statsModal')) $('statsModal').classList.remove('show'); };
+  $('btnTheme').onclick = toggleTheme;
 
   $('btnSettings').onclick = openSettings;
-  $('btnSaveSettings').onclick = saveSettings;
-  $('btnResetSettings').onclick = resetSettings;
+  $('btnCloseSettings').onclick = () => $('settingsModal').classList.remove('show');
   $('settingsModal').onclick = (e) => { if (e.target === $('settingsModal')) $('settingsModal').classList.remove('show'); };
 
-  $('btnTheme').onclick = toggleTheme;
+  $('btnExport').onclick = exportCards;
+  $('btnImportToggle').onclick = () => $('importArea').classList.toggle('show');
+  $('fileInput').onchange = handleFileSelect;
+  $('btnImportDo').onclick = doImport;
+  $('btnImportCancel').onclick = () => {
+    $('importArea').classList.remove('show');
+    $('fileInput').value = '';
+    $('fileName').style.display = 'none';
+    $('importInfo').style.display = 'none';
+    $('filePicker').classList.remove('has-file');
+    $('btnImportDo').disabled = true;
+    pendingImportData = null;
+  };
+
+  $('btnCancelEdit').onclick = () => $('editModal').classList.remove('show');
+  $('btnSaveEdit').onclick = saveEdit;
+  $('editModal').onclick = (e) => { if (e.target === $('editModal')) $('editModal').classList.remove('show'); };
+  $('editPersian').onkeydown = (e) => { if (e.key === 'Enter') saveEdit(); };
 
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -1648,8 +1846,8 @@ const bind = () => {
     } else if (e.key === 'ArrowDown' || e.key === '3') {
       if (isFlipped) markHard();
     } else if (e.key === 'Escape') {
-      $('statsModal').classList.remove('show');
       $('settingsModal').classList.remove('show');
+      $('editModal').classList.remove('show');
     }
   });
 
@@ -1663,9 +1861,7 @@ const init = () => {
   bind();
   renderBoxes();
   buildSessionQueue();
-  showNextCard();
-
-  // اگر نصب شده، دکمه نصب را مخفی کن
+  showNextCard(0);
   if (isStandalone() && installBtn) installBtn.classList.add('hidden');
 };
 
